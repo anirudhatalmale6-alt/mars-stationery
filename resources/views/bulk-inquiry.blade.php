@@ -84,7 +84,7 @@
                         </button>
                     </div>
                 </template>
-                <button type="button" @click="addItem()" class="text-primary hover:text-red-700 text-sm font-medium transition">
+                <button type="button" @click="addItem()" class="text-primary hover:text-pink-700 text-sm font-medium transition">
                     <i class="fas fa-plus mr-1"></i> Add Another Product
                 </button>
             </div>
@@ -96,7 +96,7 @@
                           class="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none">{{ old('message') }}</textarea>
             </div>
 
-            <button type="submit" class="bg-primary hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+            <button type="submit" class="bg-primary hover:bg-[#d1405b] text-white px-8 py-3 rounded-lg font-semibold transition">
                 <i class="fas fa-paper-plane mr-2"></i> Submit Inquiry
             </button>
         </form>

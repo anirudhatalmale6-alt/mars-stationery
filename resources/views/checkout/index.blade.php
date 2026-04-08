@@ -132,7 +132,7 @@
                     <h3 class="font-heading text-lg font-semibold text-dark mb-4">Payment Method</h3>
                     <div class="space-y-3">
                         <label class="flex items-start gap-3 p-4 border rounded-lg cursor-pointer transition"
-                               :class="paymentMethod === 'cod' ? 'border-primary bg-red-50' : 'border-gray-200 hover:border-gray-300'">
+                               :class="paymentMethod === 'cod' ? 'border-primary bg-pink-50' : 'border-gray-200 hover:border-gray-300'">
                             <input type="radio" name="payment_method" value="cod" x-model="paymentMethod" class="mt-0.5 text-primary focus:ring-primary">
                             <div>
                                 <p class="font-medium text-sm">Cash on Delivery</p>
@@ -140,7 +140,7 @@
                             </div>
                         </label>
                         <label class="flex items-start gap-3 p-4 border rounded-lg cursor-pointer transition"
-                               :class="paymentMethod === 'bank_transfer' ? 'border-primary bg-red-50' : 'border-gray-200 hover:border-gray-300'">
+                               :class="paymentMethod === 'bank_transfer' ? 'border-primary bg-pink-50' : 'border-gray-200 hover:border-gray-300'">
                             <input type="radio" name="payment_method" value="bank_transfer" x-model="paymentMethod" class="mt-0.5 text-primary focus:ring-primary">
                             <div>
                                 <p class="font-medium text-sm">Bank Transfer</p>
@@ -204,7 +204,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full bg-primary hover:bg-red-700 text-white py-3.5 rounded-lg font-semibold mt-6 transition transform hover:scale-[1.02]">
+                    <button type="submit" class="w-full bg-primary hover:bg-[#d1405b] text-white py-3.5 rounded-lg font-semibold mt-6 transition transform hover:scale-[1.02]">
                         <i class="fas fa-lock mr-2"></i> Place Order
                     </button>
 

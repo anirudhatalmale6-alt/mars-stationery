@@ -23,7 +23,7 @@
         <div class="flex-1" x-data="{ showForm: false, editId: null }">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="font-heading text-xl font-bold text-dark">My Addresses</h2>
-                <button @click="showForm = !showForm; editId = null" class="bg-primary hover:bg-red-700 text-white px-5 py-2 rounded-lg text-sm font-medium transition">
+                <button @click="showForm = !showForm; editId = null" class="bg-primary hover:bg-[#d1405b] text-white px-5 py-2 rounded-lg text-sm font-medium transition">
                     <i class="fas fa-plus mr-1"></i> Add Address
                 </button>
             </div>
@@ -70,7 +70,7 @@
                         <label class="text-sm text-gray-600">Set as default address</label>
                     </div>
                     <div class="md:col-span-2 flex gap-3">
-                        <button type="submit" class="bg-primary hover:bg-red-700 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition">Save Address</button>
+                        <button type="submit" class="bg-primary hover:bg-[#d1405b] text-white px-6 py-2.5 rounded-lg text-sm font-medium transition">Save Address</button>
                         <button type="button" @click="showForm = false" class="px-6 py-2.5 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition">Cancel</button>
                     </div>
                 </form>

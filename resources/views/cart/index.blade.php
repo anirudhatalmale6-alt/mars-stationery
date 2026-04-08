@@ -116,7 +116,7 @@
                         </div>
                     </div>
                     <a href="{{ url('/checkout') }}"
-                       class="block w-full bg-primary hover:bg-red-700 text-white text-center py-3 rounded-lg font-semibold mt-6 transition">
+                       class="block w-full bg-primary hover:bg-[#d1405b] text-white text-center py-3 rounded-lg font-semibold mt-6 transition">
                         Proceed to Checkout <i class="fas fa-arrow-right ml-1"></i>
                     </a>
                 </div>
@@ -127,7 +127,7 @@
             <i class="fas fa-shopping-cart text-6xl text-gray-200 mb-6"></i>
             <h3 class="font-heading text-2xl font-semibold text-gray-500">Your cart is empty</h3>
             <p class="text-gray-400 mt-2">Looks like you haven't added any products yet.</p>
-            <a href="{{ url('/products') }}" class="inline-block mt-6 bg-primary hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+            <a href="{{ url('/products') }}" class="inline-block mt-6 bg-primary hover:bg-[#d1405b] text-white px-8 py-3 rounded-lg font-semibold transition">
                 Start Shopping
             </a>
         </div>

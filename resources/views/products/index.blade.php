@@ -39,7 +39,7 @@
                         @foreach($categories as $cat)
                             <div>
                                 <a href="{{ url('/category/' . $cat->slug) }}"
-                                   class="flex items-center justify-between py-2 px-2 rounded-lg text-sm {{ (isset($category) && $category->slug === $cat->slug) ? 'bg-red-50 text-primary font-semibold' : 'text-gray-600 hover:bg-gray-50' }} transition">
+                                   class="flex items-center justify-between py-2 px-2 rounded-lg text-sm {{ (isset($category) && $category->slug === $cat->slug) ? 'bg-pink-50 text-primary font-semibold' : 'text-gray-600 hover:bg-gray-50' }} transition">
                                     <span>{{ $cat->name }}</span>
                                     <span class="text-xs text-gray-400">({{ $cat->products_count ?? 0 }})</span>
                                 </a>
@@ -69,7 +69,7 @@
                             <input type="number" name="min_price" value="{{ request('min_price') }}" placeholder="Min" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-1 focus:ring-primary focus:outline-none">
                             <input type="number" name="max_price" value="{{ request('max_price') }}" placeholder="Max" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-1 focus:ring-primary focus:outline-none">
                         </div>
-                        <button type="submit" class="w-full bg-primary text-white text-sm py-2 rounded-lg hover:bg-red-700 transition">Apply</button>
+                        <button type="submit" class="w-full bg-primary text-white text-sm py-2 rounded-lg hover:bg-[#d1405b] transition">Apply</button>
                     </form>
                 </div>
 
@@ -84,7 +84,7 @@
                             <input type="number" name="min_weight" value="{{ request('min_weight') }}" placeholder="Min" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-1 focus:ring-primary focus:outline-none">
                             <input type="number" name="max_weight" value="{{ request('max_weight') }}" placeholder="Max" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-1 focus:ring-primary focus:outline-none">
                         </div>
-                        <button type="submit" class="w-full bg-primary text-white text-sm py-2 rounded-lg hover:bg-red-700 transition">Apply</button>
+                        <button type="submit" class="w-full bg-primary text-white text-sm py-2 rounded-lg hover:bg-[#d1405b] transition">Apply</button>
                     </form>
                 </div>
             </div>

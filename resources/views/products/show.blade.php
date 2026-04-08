@@ -116,7 +116,7 @@
                             <i class="fas fa-plus text-xs"></i>
                         </button>
                     </div>
-                    <button type="submit" class="flex-1 bg-primary hover:bg-red-700 text-white py-3 rounded-lg font-semibold transition transform hover:scale-[1.02]">
+                    <button type="submit" class="flex-1 bg-primary hover:bg-[#d1405b] text-white py-3 rounded-lg font-semibold transition transform hover:scale-[1.02]">
                         <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                     </button>
                 </form>
@@ -177,7 +177,7 @@
                 <textarea name="message" rows="3" class="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none">{{ old('message') }}</textarea>
             </div>
             <div>
-                <button type="submit" class="bg-primary hover:bg-red-700 text-white px-6 py-2.5 rounded-lg font-medium transition text-sm">
+                <button type="submit" class="bg-primary hover:bg-[#d1405b] text-white px-6 py-2.5 rounded-lg font-medium transition text-sm">
                     <i class="fas fa-paper-plane mr-1"></i> Submit Inquiry
                 </button>
             </div>

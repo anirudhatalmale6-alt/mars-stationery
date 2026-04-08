@@ -13,7 +13,7 @@
 
         <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
             @if($errors->any())
-                <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 text-sm">
+                <div class="bg-pink-50 border border-pink-200 text-pink-700 px-4 py-3 rounded-lg mb-6 text-sm">
                     {{ $errors->first() }}
                 </div>
             @endif
@@ -39,7 +39,7 @@
                     </label>
                 </div>
 
-                <button type="submit" class="w-full bg-primary hover:bg-red-700 text-white py-3 rounded-lg font-semibold transition">
+                <button type="submit" class="w-full bg-primary hover:bg-[#d1405b] text-white py-3 rounded-lg font-semibold transition">
                     Sign In
                 </button>
             </form>

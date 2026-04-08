@@ -106,7 +106,7 @@
     @endif
 
     <div class="text-center">
-        <a href="{{ url('/products') }}" class="inline-block bg-primary hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+        <a href="{{ url('/products') }}" class="inline-block bg-primary hover:bg-[#d1405b] text-white px-8 py-3 rounded-lg font-semibold transition">
             Continue Shopping
         </a>
         @auth

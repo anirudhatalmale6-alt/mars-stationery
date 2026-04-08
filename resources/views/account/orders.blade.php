@@ -40,7 +40,7 @@
                                             'processing' => 'bg-blue-100 text-blue-700',
                                             'shipped' => 'bg-purple-100 text-purple-700',
                                             'delivered' => 'bg-green-100 text-green-700',
-                                            'cancelled' => 'bg-red-100 text-red-700',
+                                            'cancelled' => 'bg-red-100 text-pink-700',
                                         ];
                                     @endphp
                                     <span class="text-xs font-semibold px-3 py-1 rounded-full {{ $statusColors[$order->order_status] ?? 'bg-gray-100 text-gray-700' }}">
@@ -66,7 +66,7 @@
                         <i class="fas fa-box-open text-5xl text-gray-200 mb-4"></i>
                         <h3 class="font-heading text-lg font-semibold text-gray-500">No orders yet</h3>
                         <p class="text-gray-400 mt-1 text-sm">Your order history will appear here.</p>
-                        <a href="{{ url('/products') }}" class="inline-block mt-4 bg-primary text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700 transition">
+                        <a href="{{ url('/products') }}" class="inline-block mt-4 bg-primary text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-[#d1405b] transition">
                             Start Shopping
                         </a>
                     </div>

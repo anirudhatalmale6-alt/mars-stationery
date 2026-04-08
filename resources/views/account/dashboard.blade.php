@@ -29,21 +29,21 @@
             {{-- Quick Links --}}
             <div class="grid md:grid-cols-3 gap-5 mb-8">
                 <a href="{{ url('/account/orders') }}" class="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md hover:border-primary/30 transition group">
-                    <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-white transition">
+                    <div class="w-12 h-12 bg-pink-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-white transition">
                         <i class="fas fa-box text-primary group-hover:text-white text-lg"></i>
                     </div>
                     <h3 class="font-heading font-semibold text-dark">My Orders</h3>
                     <p class="text-sm text-gray-500 mt-1">Track and manage your orders</p>
                 </a>
                 <a href="{{ url('/account/addresses') }}" class="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md hover:border-primary/30 transition group">
-                    <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-white transition">
+                    <div class="w-12 h-12 bg-pink-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-white transition">
                         <i class="fas fa-map-marker-alt text-primary group-hover:text-white text-lg"></i>
                     </div>
                     <h3 class="font-heading font-semibold text-dark">Addresses</h3>
                     <p class="text-sm text-gray-500 mt-1">Manage delivery addresses</p>
                 </a>
                 <a href="{{ url('/account/profile') }}" class="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md hover:border-primary/30 transition group">
-                    <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-white transition">
+                    <div class="w-12 h-12 bg-pink-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-white transition">
                         <i class="fas fa-user-cog text-primary group-hover:text-white text-lg"></i>
                     </div>
                     <h3 class="font-heading font-semibold text-dark">Profile</h3>
@@ -79,7 +79,7 @@
                                                     'processing' => 'bg-blue-100 text-blue-700',
                                                     'shipped' => 'bg-purple-100 text-purple-700',
                                                     'delivered' => 'bg-green-100 text-green-700',
-                                                    'cancelled' => 'bg-red-100 text-red-700',
+                                                    'cancelled' => 'bg-red-100 text-pink-700',
                                                 ];
                                             @endphp
                                             <span class="text-xs font-semibold px-2 py-1 rounded {{ $statusColors[$order->order_status] ?? 'bg-gray-100 text-gray-700' }}">

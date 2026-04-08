@@ -46,7 +46,7 @@
                                    class="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none">
                         </div>
                     </div>
-                    <button type="submit" class="bg-primary hover:bg-red-700 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition">
+                    <button type="submit" class="bg-primary hover:bg-[#d1405b] text-white px-6 py-2.5 rounded-lg text-sm font-medium transition">
                         Update Profile
                     </button>
                 </form>

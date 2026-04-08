@@ -4,325 +4,443 @@
 
 @section('content')
 
-{{-- Hero Slider --}}
-<section x-data="{ current: 0, slides: {{ $banners->count() > 0 ? $banners->count() : 3 }} }"
-         x-init="setInterval(() => current = (current + 1) % slides, 5000)"
-         class="relative overflow-hidden bg-gray-100">
-    <div class="relative" style="height: 500px;">
-        @if($banners->count() > 0)
-            @foreach($banners as $i => $banner)
-                <div x-show="current === {{ $i }}"
-                     x-transition:enter="transition ease-out duration-700"
-                     x-transition:enter-start="opacity-0 transform translate-x-full"
-                     x-transition:enter-end="opacity-100 transform translate-x-0"
-                     x-transition:leave="transition ease-in duration-500"
-                     x-transition:leave-start="opacity-100"
-                     x-transition:leave-end="opacity-0"
-                     class="absolute inset-0">
-                    <div class="h-full flex items-center"
-                         style="background: linear-gradient(135deg, {{ $i % 2 === 0 ? '#DC2626' : '#1a1a1a' }} 0%, {{ $i % 2 === 0 ? '#991b1b' : '#374151' }} 100%);">
-                        <div class="max-w-7xl mx-auto px-4 w-full">
-                            <div class="max-w-lg text-white">
-                                <h2 class="font-heading text-4xl md:text-5xl font-bold mb-4 animate-pulse">{{ $banner->title }}</h2>
-                                <p class="text-lg mb-6 text-white/80">{{ $banner->subtitle }}</p>
-                                <a href="{{ $banner->link ?? '/products' }}"
-                                   class="inline-block bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition transform hover:scale-105">
-                                    Shop Now <i class="fas fa-arrow-right ml-2"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        @else
-            @php $defaultSlides = [
-                ['title' => 'Premium Stationery Collection', 'subtitle' => 'Discover our wide range of quality stationery products for office and school', 'bg' => '#DC2626', 'bg2' => '#991b1b'],
-                ['title' => 'Back to School Essentials', 'subtitle' => 'Everything you need for the new school year at unbeatable prices', 'bg' => '#1a1a1a', 'bg2' => '#374151'],
-                ['title' => 'Office Supplies Sale', 'subtitle' => 'Up to 40% off on selected office supplies. Limited time offer!', 'bg' => '#DC2626', 'bg2' => '#7f1d1d'],
-            ]; @endphp
-            @foreach($defaultSlides as $i => $slide)
-                <div x-show="current === {{ $i }}"
-                     x-transition:enter="transition ease-out duration-700"
-                     x-transition:enter-start="opacity-0"
-                     x-transition:enter-end="opacity-100"
-                     x-transition:leave="transition ease-in duration-500"
-                     x-transition:leave-start="opacity-100"
-                     x-transition:leave-end="opacity-0"
-                     class="absolute inset-0">
-                    <div class="h-full flex items-center" style="background: linear-gradient(135deg, {{ $slide['bg'] }} 0%, {{ $slide['bg2'] }} 100%);">
-                        <div class="max-w-7xl mx-auto px-4 w-full">
-                            <div class="max-w-lg text-white">
-                                <h2 class="font-heading text-4xl md:text-5xl font-bold mb-4">{{ $slide['title'] }}</h2>
-                                <p class="text-lg mb-6 text-white/80">{{ $slide['subtitle'] }}</p>
-                                <a href="{{ url('/products') }}" class="inline-block bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition transform hover:scale-105">
-                                    Shop Now <i class="fas fa-arrow-right ml-2"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        @endif
-    </div>
-    {{-- Dots --}}
-    <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2">
-        <template x-for="i in slides" :key="i">
-            <button @click="current = i - 1"
-                    :class="current === i - 1 ? 'bg-white w-8' : 'bg-white/50 w-3'"
-                    class="h-3 rounded-full transition-all duration-300"></button>
-        </template>
-    </div>
-    {{-- Arrows --}}
-    <button @click="current = (current - 1 + slides) % slides" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 rounded-full flex items-center justify-center text-white transition">
-        <i class="fas fa-chevron-left"></i>
-    </button>
-    <button @click="current = (current + 1) % slides" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 rounded-full flex items-center justify-center text-white transition">
-        <i class="fas fa-chevron-right"></i>
-    </button>
-</section>
-
-{{-- Category Grid --}}
-<section class="py-14 bg-white">
+{{-- Section 1: Hero Banner Area --}}
+<section class="py-4 bg-white">
     <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-10">
-            <h2 class="font-heading text-3xl font-bold text-dark">Shop by Category</h2>
-            <p class="text-gray-500 mt-2">Browse our wide range of stationery categories</p>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
-            @foreach($categories as $cat)
-                <a href="{{ url('/category/' . $cat->slug) }}"
-                   class="group relative rounded-xl overflow-hidden aspect-square bg-gray-100">
-                    @if($cat->image)
-                        <img src="{{ asset('storage/' . $cat->image) }}" alt="{{ $cat->name }}"
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                             onerror="this.style.display='none'">
-                    @endif
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-primary/80 transition-all duration-300"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-                        <h3 class="font-heading font-semibold text-sm">{{ $cat->name }}</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-4" style="min-height: 420px;">
+            {{-- Main Large Banner (left 60%) --}}
+            <div class="lg:col-span-3 relative rounded-2xl overflow-hidden group cursor-pointer" style="min-height: 420px;">
+                <div class="absolute inset-0" style="background: linear-gradient(135deg, #f8e8f0 0%, #ede4f5 50%, #e8e0f8 100%);"></div>
+                <div class="relative h-full flex items-center p-8 md:p-12">
+                    <div class="max-w-sm">
+                        <p class="text-muted text-sm uppercase tracking-widest mb-2">Mix & Match</p>
+                        <h1 class="text-3xl md:text-4xl lg:text-[42px] font-bold text-navy leading-tight mb-6">With Our<br>3 For 2<br>Stationery</h1>
+                        <a href="{{ url('/products') }}" class="inline-flex items-center gap-2 bg-primary text-white px-7 py-3.5 rounded-full font-medium text-sm hover:bg-pink-600 transition-all group-hover:gap-3">
+                            SHOP NOW <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Right Column (2 stacked banners) --}}
+            <div class="lg:col-span-2 flex flex-col gap-4">
+                {{-- Top right banner --}}
+                <a href="{{ url('/products') }}" class="relative rounded-2xl overflow-hidden group flex-1 cursor-pointer" style="min-height: 200px;">
+                    <div class="absolute inset-0" style="background: linear-gradient(135deg, #fdf2e9 0%, #fce4d2 100%);"></div>
+                    <div class="relative h-full flex items-center p-6 md:p-8">
+                        <div>
+                            <p class="text-navy text-lg font-bold">Metal Pens</p>
+                            <p class="text-primary font-bold text-xl mt-1">15% Off</p>
+                            <span class="inline-flex items-center gap-1 text-navy text-sm font-medium mt-3 group-hover:text-primary transition">
+                                Shop Now <i class="fas fa-arrow-right text-xs"></i>
+                            </span>
+                        </div>
                     </div>
                 </a>
-            @endforeach
-            @if($categories->count() < 6)
-                @for($i = $categories->count(); $i < 6; $i++)
-                    @php $placeholderCats = ['Notebooks', 'Pens', 'Art Supplies', 'Files', 'Paper', 'Office']; @endphp
-                    <a href="{{ url('/products') }}" class="group relative rounded-xl overflow-hidden aspect-square bg-gradient-to-br from-gray-200 to-gray-300">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="fas fa-folder text-4xl text-gray-400 group-hover:text-primary transition"></i>
+
+                {{-- Bottom right banner --}}
+                <a href="{{ url('/products') }}" class="relative rounded-2xl overflow-hidden group flex-1 cursor-pointer" style="min-height: 200px;">
+                    <div class="absolute inset-0" style="background: linear-gradient(135deg, #e8f4f0 0%, #d5ede6 100%);"></div>
+                    <div class="relative h-full flex items-center p-6 md:p-8">
+                        <div>
+                            <p class="text-navy text-lg font-bold">Office Adhesive / Tape</p>
+                            <p class="text-muted text-sm mt-1">From <span class="text-primary font-bold text-lg">$12.99</span></p>
+                            <span class="inline-flex items-center gap-1 text-navy text-sm font-medium mt-3 group-hover:text-primary transition">
+                                Shop Now <i class="fas fa-arrow-right text-xs"></i>
+                            </span>
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-                            <h3 class="font-heading font-semibold text-sm">{{ $placeholderCats[$i] ?? 'Category' }}</h3>
-                        </div>
-                    </a>
-                @endfor
-            @endif
-        </div>
-    </div>
-</section>
-
-{{-- Featured Products Carousel --}}
-@if($featured->count() > 0)
-<section class="py-14 bg-light">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="flex items-center justify-between mb-8">
-            <div>
-                <h2 class="font-heading text-3xl font-bold text-dark">Featured Products</h2>
-                <p class="text-gray-500 mt-1">Hand-picked products just for you</p>
-            </div>
-            <a href="{{ url('/products?filter=featured') }}" class="text-primary hover:underline font-medium text-sm">
-                View All <i class="fas fa-arrow-right ml-1"></i>
-            </a>
-        </div>
-        <div x-data="{ scrollEl: null }" x-init="scrollEl = $refs.carousel" class="relative">
-            <div x-ref="carousel" class="flex gap-5 overflow-x-auto scrollbar-hide scroll-smooth pb-4">
-                @foreach($featured as $product)
-                    <div class="min-w-[250px] max-w-[250px] flex-shrink-0">
-                        @include('components.product-card', ['product' => $product])
                     </div>
-                @endforeach
+                </a>
             </div>
-            <button @click="scrollEl.scrollBy({ left: -280, behavior: 'smooth' })"
-                    class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 bg-white shadow-lg rounded-full flex items-center justify-center text-gray-600 hover:text-primary transition z-10">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button @click="scrollEl.scrollBy({ left: 280, behavior: 'smooth' })"
-                    class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-10 h-10 bg-white shadow-lg rounded-full flex items-center justify-center text-gray-600 hover:text-primary transition z-10">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
-    </div>
-</section>
-@endif
-
-{{-- Promotional Banners --}}
-<section class="py-14 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="grid md:grid-cols-2 gap-6">
-            <a href="{{ url('/products?filter=featured') }}" class="relative rounded-2xl overflow-hidden group" style="min-height: 220px;">
-                <div class="absolute inset-0 bg-gradient-to-r from-primary to-red-700"></div>
-                <div class="relative p-8 md:p-10 flex flex-col justify-center h-full text-white">
-                    <span class="text-sm font-medium text-red-200 uppercase tracking-wider">Limited Offer</span>
-                    <h3 class="font-heading text-2xl md:text-3xl font-bold mt-2">Up to 50% Off<br>Office Supplies</h3>
-                    <p class="mt-2 text-red-100 text-sm">Shop now and save big on essential supplies</p>
-                    <span class="inline-flex items-center gap-2 mt-4 font-semibold text-sm group-hover:gap-3 transition-all">
-                        Shop Now <i class="fas fa-arrow-right"></i>
-                    </span>
-                </div>
-            </a>
-            <a href="{{ url('/products?filter=new') }}" class="relative rounded-2xl overflow-hidden group" style="min-height: 220px;">
-                <div class="absolute inset-0 bg-gradient-to-r from-dark to-gray-700"></div>
-                <div class="relative p-8 md:p-10 flex flex-col justify-center h-full text-white">
-                    <span class="text-sm font-medium text-gray-400 uppercase tracking-wider">Just Arrived</span>
-                    <h3 class="font-heading text-2xl md:text-3xl font-bold mt-2">New Stationery<br>Collection</h3>
-                    <p class="mt-2 text-gray-300 text-sm">Explore the latest additions to our store</p>
-                    <span class="inline-flex items-center gap-2 mt-4 font-semibold text-sm group-hover:gap-3 transition-all">
-                        Explore Now <i class="fas fa-arrow-right"></i>
-                    </span>
-                </div>
-            </a>
         </div>
     </div>
 </section>
 
-{{-- New Arrivals --}}
-@if($newArrivals->count() > 0)
-<section class="py-14 bg-light">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="flex items-center justify-between mb-8">
-            <div>
-                <h2 class="font-heading text-3xl font-bold text-dark">New Arrivals</h2>
-                <p class="text-gray-500 mt-1">Check out what's new in store</p>
+{{-- Section 2: Trust Badges Strip --}}
+<section class="border-y border-gray-200 bg-white">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-light flex items-center justify-center text-primary flex-shrink-0">
+                    <i class="fas fa-truck text-xl"></i>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-navy text-sm">Fast Delivery</h4>
+                    <p class="text-muted text-xs mt-0.5">Across Sri Lanka</p>
+                </div>
             </div>
-            <a href="{{ url('/products?filter=new') }}" class="text-primary hover:underline font-medium text-sm">
-                View All <i class="fas fa-arrow-right ml-1"></i>
-            </a>
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-light flex items-center justify-center text-primary flex-shrink-0">
+                    <i class="fas fa-shield-alt text-xl"></i>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-navy text-sm">Safe Payments</h4>
+                    <p class="text-muted text-xs mt-0.5">100% Secure</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-light flex items-center justify-center text-primary flex-shrink-0">
+                    <i class="fas fa-tags text-xl"></i>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-navy text-sm">Discount Coupons</h4>
+                    <p class="text-muted text-xs mt-0.5">Best Prices</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-light flex items-center justify-center text-primary flex-shrink-0">
+                    <i class="fas fa-headset text-xl"></i>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-navy text-sm">Quality Support</h4>
+                    <p class="text-muted text-xs mt-0.5">24/7 Support</p>
+                </div>
+            </div>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            @foreach($newArrivals->take(8) as $product)
-                @include('components.product-card', ['product' => $product])
+    </div>
+</section>
+
+{{-- Section 3: Product Tabs - "Cute Stationery" --}}
+@if($featured->count() > 0 || $newArrivals->count() > 0 || $bestSellers->count() > 0)
+<section class="py-16 bg-white" x-data="{ activeTab: 'deals' }">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-navy">Cute Stationery</h2>
+        </div>
+
+        {{-- Tab Buttons --}}
+        <div class="flex flex-wrap justify-center gap-6 md:gap-8 mb-10 border-b border-gray-200 pb-0">
+            <button @click="activeTab = 'deals'"
+                    :class="activeTab === 'deals' ? 'text-primary border-primary' : 'text-muted border-transparent hover:text-navy'"
+                    class="pb-3 border-b-2 text-sm font-semibold uppercase tracking-wider transition">Deals</button>
+            @foreach($topCategories->take(4) as $tc)
+                <button @click="activeTab = '{{ $tc->slug }}'"
+                        :class="activeTab === '{{ $tc->slug }}' ? 'text-primary border-primary' : 'text-muted border-transparent hover:text-navy'"
+                        class="pb-3 border-b-2 text-sm font-semibold uppercase tracking-wider transition">{{ $tc->name }}</button>
             @endforeach
         </div>
-    </div>
-</section>
-@endif
 
-{{-- Deal of the Day --}}
-@if($dealProduct)
-<section class="py-14 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-8">
-            <h2 class="font-heading text-3xl font-bold text-dark">Deal of the Day</h2>
-            <p class="text-gray-500 mt-1">Hurry up! This offer won't last forever</p>
-        </div>
-        <div class="bg-light rounded-2xl p-6 md:p-10 flex flex-col md:flex-row items-center gap-8">
-            @php
-                $dealImage = $dealProduct->images->where('is_primary', true)->first() ?? $dealProduct->images->first();
-                $dealImgUrl = $dealImage ? asset('storage/' . $dealImage->image_path) : 'https://placehold.co/500x500/f5f5f5/999?text=' . urlencode($dealProduct->name);
-            @endphp
-            <div class="md:w-1/2">
-                <img src="{{ $dealImgUrl }}" alt="{{ $dealProduct->name }}"
-                     class="w-full max-w-md mx-auto rounded-xl"
-                     onerror="this.src='https://placehold.co/500x500/f5f5f5/999?text=No+Image'">
-            </div>
-            <div class="md:w-1/2">
-                @if($dealProduct->category)
-                    <span class="text-xs text-primary font-semibold uppercase tracking-wider">{{ $dealProduct->category->name }}</span>
-                @endif
-                <h3 class="font-heading text-2xl md:text-3xl font-bold text-dark mt-2">{{ $dealProduct->name }}</h3>
-                <div class="flex items-center gap-1 mt-2">
-                    @for($i = 0; $i < 5; $i++)
-                        <i class="fas fa-star text-yellow-400 text-sm"></i>
-                    @endfor
-                    <span class="text-gray-400 text-sm ml-1">(4.8)</span>
-                </div>
-                <div class="flex items-center gap-3 mt-4">
-                    <span class="text-3xl font-bold text-primary">LKR {{ number_format($dealProduct->sale_price, 2) }}</span>
-                    <span class="text-xl text-gray-400 line-through">LKR {{ number_format($dealProduct->price, 2) }}</span>
-                </div>
-                <p class="text-gray-500 mt-3 text-sm leading-relaxed">{{ Str::limit($dealProduct->description, 150) }}</p>
-
-                {{-- Countdown --}}
-                <div x-data="countdown()" x-init="start()" class="flex gap-3 mt-6">
-                    <div class="bg-primary text-white rounded-lg w-16 h-16 flex flex-col items-center justify-center">
-                        <span x-text="hours" class="text-xl font-bold">00</span>
-                        <span class="text-[9px] uppercase">Hours</span>
-                    </div>
-                    <div class="bg-primary text-white rounded-lg w-16 h-16 flex flex-col items-center justify-center">
-                        <span x-text="minutes" class="text-xl font-bold">00</span>
-                        <span class="text-[9px] uppercase">Mins</span>
-                    </div>
-                    <div class="bg-primary text-white rounded-lg w-16 h-16 flex flex-col items-center justify-center">
-                        <span x-text="seconds" class="text-xl font-bold">00</span>
-                        <span class="text-[9px] uppercase">Secs</span>
-                    </div>
-                </div>
-
-                <form action="{{ url('/cart/add') }}" method="POST" class="mt-6">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $dealProduct->id }}">
-                    <input type="hidden" name="quantity" value="1">
-                    <button type="submit" class="bg-primary hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition transform hover:scale-105">
-                        <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-@endif
-
-{{-- Best Sellers Tabs --}}
-@if($bestSellers->count() > 0)
-<section class="py-14 bg-light" x-data="{ activeTab: 'all' }">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-8">
-            <h2 class="font-heading text-3xl font-bold text-dark">Best Sellers</h2>
-            <p class="text-gray-500 mt-1">Our most popular products</p>
-        </div>
-        <div class="flex flex-wrap justify-center gap-2 mb-8">
-            <button @click="activeTab = 'all'" :class="activeTab === 'all' ? 'bg-primary text-white' : 'bg-white text-gray-600 hover:bg-gray-100'"
-                    class="px-5 py-2 rounded-full text-sm font-medium transition">All</button>
-            @foreach($topCategories as $tc)
-                <button @click="activeTab = '{{ $tc->slug }}'" :class="activeTab === '{{ $tc->slug }}' ? 'bg-primary text-white' : 'bg-white text-gray-600 hover:bg-gray-100'"
-                        class="px-5 py-2 rounded-full text-sm font-medium transition">{{ $tc->name }}</button>
-            @endforeach
-        </div>
-        <div x-show="activeTab === 'all'" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            @foreach($bestSellers->take(8) as $product)
-                @include('components.product-card', ['product' => $product])
-            @endforeach
-        </div>
-        @foreach($topCategories as $tc)
-            <div x-show="activeTab === '{{ $tc->slug }}'" x-cloak class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-                @php
-                    $catProducts = \App\Models\Product::where('category_id', $tc->id)->where('is_active', true)->with(['images', 'category'])->take(8)->get();
-                @endphp
-                @foreach($catProducts as $product)
+        {{-- Deals Tab (Featured Products) --}}
+        <div x-show="activeTab === 'deals'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+                @foreach($featured->take(5) as $product)
                     @include('components.product-card', ['product' => $product])
                 @endforeach
-                @if($catProducts->count() === 0)
-                    <div class="col-span-full text-center py-10 text-gray-400">No products in this category yet.</div>
+                @if($featured->count() < 5)
+                    @foreach($newArrivals->take(5 - $featured->count()) as $product)
+                        @include('components.product-card', ['product' => $product])
+                    @endforeach
                 @endif
+            </div>
+        </div>
+
+        {{-- Category Tabs --}}
+        @foreach($topCategories->take(4) as $tc)
+            <div x-show="activeTab === '{{ $tc->slug }}'" x-cloak x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                @php
+                    $catProducts = \App\Models\Product::where('category_id', $tc->id)->where('is_active', true)->with(['images', 'category'])->take(5)->get();
+                @endphp
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+                    @foreach($catProducts as $product)
+                        @include('components.product-card', ['product' => $product])
+                    @endforeach
+                    @if($catProducts->count() === 0)
+                        <div class="col-span-full text-center py-12 text-muted">No products in this category yet.</div>
+                    @endif
+                </div>
             </div>
         @endforeach
     </div>
 </section>
 @endif
 
-{{-- Brand Logos --}}
-@if($brands->count() > 0)
-<section class="py-12 bg-white border-t border-gray-100">
+{{-- Section 4: Shop By Categories --}}
+<section class="py-16 bg-light">
     <div class="max-w-7xl mx-auto px-4">
-        <h3 class="font-heading text-center text-lg font-semibold text-gray-400 mb-8">Trusted Brands We Carry</h3>
-        <div class="flex items-center justify-center gap-10 flex-wrap opacity-60">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-navy">Shop By Categories</h2>
+            <p class="text-muted mt-2">Browse our curated stationery collections</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4" style="min-height: 500px;">
+            @php
+                $catBgs = ['#f8e8f0', '#fdf2e9', '#e8f4f0', '#ede4f5'];
+                $catLabels = ['Books & Stationery', 'Pens & Pencils', 'Paper & Card', 'School Supplies'];
+                $displayCats = $categories->take(4);
+            @endphp
+
+            {{-- Left tall card --}}
+            <div class="relative rounded-2xl overflow-hidden group cursor-pointer" style="min-height: 500px;">
+                @if($displayCats->count() > 0)
+                    @php $c = $displayCats[0]; @endphp
+                    <a href="{{ url('/category/' . $c->slug) }}" class="block h-full">
+                @else
+                    <a href="{{ url('/products') }}" class="block h-full">
+                @endif
+                    <div class="absolute inset-0" style="background: linear-gradient(135deg, {{ $catBgs[0] }}, #f0d4e4);"></div>
+                    @if(isset($c) && $c->image)
+                        <img src="{{ asset('storage/' . $c->image) }}" alt="{{ $c->name ?? '' }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.style.display='none'">
+                    @endif
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <span class="bg-white/90 backdrop-blur-sm text-navy text-sm font-semibold px-5 py-2 rounded-full">
+                            {{ isset($c) ? $c->name : $catLabels[0] }}
+                        </span>
+                    </div>
+                </a>
+            </div>
+
+            {{-- Center 2 stacked --}}
+            <div class="flex flex-col gap-4">
+                @for($ci = 1; $ci <= 2; $ci++)
+                    <div class="relative rounded-2xl overflow-hidden group cursor-pointer flex-1" style="min-height: 240px;">
+                        @if($displayCats->count() > $ci)
+                            @php $c2 = $displayCats[$ci]; @endphp
+                            <a href="{{ url('/category/' . $c2->slug) }}" class="block h-full">
+                        @else
+                            <a href="{{ url('/products') }}" class="block h-full">
+                        @endif
+                            <div class="absolute inset-0" style="background: linear-gradient(135deg, {{ $catBgs[$ci] }}, {{ $ci === 1 ? '#fce4d2' : '#d5ede6' }});"></div>
+                            @if(isset($c2) && $c2->image)
+                                <img src="{{ asset('storage/' . $c2->image) }}" alt="{{ $c2->name ?? '' }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.style.display='none'">
+                            @endif
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                            <div class="absolute bottom-5 left-5">
+                                <span class="bg-white/90 backdrop-blur-sm text-navy text-sm font-semibold px-5 py-2 rounded-full">
+                                    {{ isset($c2) ? $c2->name : $catLabels[$ci] }}
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    @php unset($c2); @endphp
+                @endfor
+            </div>
+
+            {{-- Right tall card --}}
+            <div class="relative rounded-2xl overflow-hidden group cursor-pointer" style="min-height: 500px;">
+                @if($displayCats->count() > 3)
+                    @php $c3 = $displayCats[3]; @endphp
+                    <a href="{{ url('/category/' . $c3->slug) }}" class="block h-full">
+                @else
+                    <a href="{{ url('/products') }}" class="block h-full">
+                @endif
+                    <div class="absolute inset-0" style="background: linear-gradient(135deg, {{ $catBgs[3] }}, #d8ccf0);"></div>
+                    @if(isset($c3) && $c3->image)
+                        <img src="{{ asset('storage/' . $c3->image) }}" alt="{{ $c3->name ?? '' }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.style.display='none'">
+                    @endif
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <span class="bg-white/90 backdrop-blur-sm text-navy text-sm font-semibold px-5 py-2 rounded-full">
+                            {{ isset($c3) ? $c3->name : $catLabels[3] }}
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- Section 5: Best Sellers --}}
+@if($bestSellers->count() > 0)
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-navy">Best Sellers</h2>
+            <p class="text-muted mt-2">Our most popular products loved by customers</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+            @foreach($bestSellers->take(5) as $product)
+                @include('components.product-card', ['product' => $product])
+            @endforeach
+        </div>
+        <div class="text-center mt-10">
+            <a href="{{ url('/products') }}" class="inline-flex items-center gap-2 border-2 border-navy text-navy px-8 py-3 rounded-full font-medium text-sm hover:bg-navy hover:text-white transition-all">
+                View All Products <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+        </div>
+    </div>
+</section>
+@endif
+
+{{-- Section 6: Deal Of The Day --}}
+@if($dealProduct)
+<section class="py-16 bg-navy relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {{-- Left Side --}}
+            <div class="text-white">
+                <p class="text-primary text-sm uppercase tracking-widest font-medium mb-3">Limited Time Offer</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-3">Deal Of The Day</h2>
+                <p class="text-gray-400 mb-8 leading-relaxed">{{ Str::limit($dealProduct->description, 120) }}</p>
+
+                {{-- Countdown Timer --}}
+                <div x-data="countdown()" x-init="start()" class="flex gap-3 mb-8">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl w-20 h-20 flex flex-col items-center justify-center border border-white/10">
+                        <span x-text="days" class="text-2xl font-bold text-white">00</span>
+                        <span class="text-[10px] uppercase text-gray-400 tracking-wider">Days</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl w-20 h-20 flex flex-col items-center justify-center border border-white/10">
+                        <span x-text="hours" class="text-2xl font-bold text-white">00</span>
+                        <span class="text-[10px] uppercase text-gray-400 tracking-wider">Hours</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl w-20 h-20 flex flex-col items-center justify-center border border-white/10">
+                        <span x-text="minutes" class="text-2xl font-bold text-white">00</span>
+                        <span class="text-[10px] uppercase text-gray-400 tracking-wider">Minutes</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl w-20 h-20 flex flex-col items-center justify-center border border-white/10">
+                        <span x-text="seconds" class="text-2xl font-bold text-white">00</span>
+                        <span class="text-[10px] uppercase text-gray-400 tracking-wider">Seconds</span>
+                    </div>
+                </div>
+
+                <a href="{{ url('/products/' . $dealProduct->slug) }}" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-3.5 rounded-full font-medium text-sm hover:bg-pink-600 transition-all">
+                    Shop Now <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+            {{-- Right Side: Product Images --}}
+            <div class="relative flex items-center justify-center">
+                @php
+                    $dealImage = $dealProduct->images->where('is_primary', true)->first() ?? $dealProduct->images->first();
+                    $dealImgUrl = $dealImage ? asset('storage/' . $dealImage->image_path) : 'https://placehold.co/500x500/01213A/E84F69?text=' . urlencode($dealProduct->name);
+                @endphp
+                <div class="relative">
+                    <div class="absolute -inset-8 bg-primary/10 rounded-full blur-3xl"></div>
+                    <img src="{{ $dealImgUrl }}" alt="{{ $dealProduct->name }}"
+                         class="relative w-72 h-72 md:w-96 md:h-96 object-contain drop-shadow-2xl"
+                         onerror="this.src='https://placehold.co/500x500/01213A/E84F69?text=No+Image'">
+                    <div class="absolute -bottom-4 -right-4 bg-primary text-white rounded-2xl p-4 shadow-xl">
+                        <p class="text-xs text-pink-200 line-through">LKR {{ number_format($dealProduct->price, 2) }}</p>
+                        <p class="text-xl font-bold">LKR {{ number_format($dealProduct->sale_price ?? $dealProduct->price, 2) }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endif
+
+{{-- Section 7: 3-Column Promo Cards --}}
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            @php
+                $promos = [
+                    ['title' => 'Notebooks & Pens', 'desc' => 'Premium writing essentials for everyday use', 'bg' => '#f8e8f0', 'icon' => 'fas fa-book'],
+                    ['title' => 'Back to School', 'desc' => 'Everything students need to succeed', 'bg' => '#e8f4f0', 'icon' => 'fas fa-graduation-cap'],
+                    ['title' => 'Birthday Cards', 'desc' => 'Unique cards for every special occasion', 'bg' => '#fdf2e9', 'icon' => 'fas fa-gift'],
+                ];
+            @endphp
+            @foreach($promos as $promo)
+                <a href="{{ url('/products') }}" class="group relative rounded-2xl overflow-hidden" style="min-height: 280px;">
+                    <div class="absolute inset-0" style="background: linear-gradient(135deg, {{ $promo['bg'] }}, {{ $promo['bg'] }}dd);"></div>
+                    <div class="relative h-full flex flex-col justify-between p-8">
+                        <div class="w-16 h-16 rounded-full bg-white/50 flex items-center justify-center mb-auto">
+                            <i class="{{ $promo['icon'] }} text-2xl text-navy"></i>
+                        </div>
+                        <div class="mt-auto">
+                            <h3 class="text-xl font-bold text-navy mb-2">{{ $promo['title'] }}</h3>
+                            <p class="text-muted text-sm mb-4">{{ $promo['desc'] }}</p>
+                            <span class="inline-flex items-center gap-2 text-navy text-sm font-semibold group-hover:text-primary group-hover:gap-3 transition-all">
+                                Shop Now <i class="fas fa-arrow-right text-xs"></i>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- Section 8: Testimonials --}}
+<section class="py-16 bg-light" x-data="{ activeSlide: 0 }">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-navy mb-12">Our Customers Say</h2>
+
+        @php
+            $testimonials = [
+                ['quote' => 'Amazing quality stationery! I ordered notebooks and pens for my entire office and everyone loved them. The delivery was super fast too.', 'name' => 'Sarah Fernando', 'role' => 'Office Manager'],
+                ['quote' => 'My go-to shop for all school supplies. The prices are unbeatable and the variety is incredible. Highly recommend Mars Stationery!', 'name' => 'Dinesh Perera', 'role' => 'Teacher'],
+                ['quote' => 'Beautiful packaging, premium products, and excellent customer service. I keep coming back for more art supplies every month.', 'name' => 'Amaya Silva', 'role' => 'Artist'],
+            ];
+        @endphp
+
+        <div class="relative">
+            @foreach($testimonials as $i => $t)
+                <div x-show="activeSlide === {{ $i }}" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                    <div class="text-primary text-6xl mb-6 leading-none">&ldquo;</div>
+                    <p class="text-lg md:text-xl text-muted italic leading-relaxed max-w-2xl mx-auto mb-8">{{ $t['quote'] }}</p>
+                    <h4 class="font-bold text-navy text-lg">{{ $t['name'] }}</h4>
+                    <p class="text-muted text-sm mt-1">{{ $t['role'] }}</p>
+                </div>
+            @endforeach
+        </div>
+
+        {{-- Dots --}}
+        <div class="flex justify-center gap-2 mt-8">
+            @foreach($testimonials as $i => $t)
+                <button @click="activeSlide = {{ $i }}"
+                        :class="activeSlide === {{ $i }} ? 'bg-primary w-8' : 'bg-gray-300 w-3'"
+                        class="h-3 rounded-full transition-all duration-300"></button>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- Section 9: Instagram Gallery --}}
+<section class="overflow-hidden">
+    <div class="grid grid-cols-3 md:grid-cols-5">
+        @php
+            $instaColors = ['#f8e8f0', '#fdf2e9', '#e8f4f0', '#ede4f5', '#fce8e4'];
+            $instaIcons = ['fa-pen-fancy', 'fa-book-open', 'fa-palette', 'fa-pencil-alt', 'fa-paint-brush'];
+        @endphp
+        @for($ig = 0; $ig < 5; $ig++)
+            <div class="group relative aspect-square cursor-pointer overflow-hidden" style="background: {{ $instaColors[$ig] }};">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <i class="fas {{ $instaIcons[$ig] }} text-4xl md:text-5xl" style="color: {{ $instaColors[$ig] }}; filter: brightness(0.85);"></i>
+                </div>
+                <div class="absolute inset-0 bg-primary/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <i class="fab fa-instagram text-white text-3xl"></i>
+                </div>
+            </div>
+        @endfor
+    </div>
+</section>
+
+{{-- New Arrivals Row --}}
+@if($newArrivals->count() > 0)
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex items-center justify-between mb-10">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-navy">New Arrivals</h2>
+                <p class="text-muted mt-2">Fresh products just landed in store</p>
+            </div>
+            <a href="{{ url('/products?filter=new') }}" class="hidden md:inline-flex items-center gap-2 text-navy hover:text-primary font-medium text-sm transition">
+                View All <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+            @foreach($newArrivals->take(5) as $product)
+                @include('components.product-card', ['product' => $product])
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
+{{-- Brands --}}
+@if($brands->count() > 0)
+<section class="py-12 bg-light border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex items-center justify-center gap-10 flex-wrap opacity-50 hover:opacity-80 transition-opacity duration-500">
             @foreach($brands as $brand)
-                <div class="flex items-center justify-center h-12" title="{{ $brand->name }}">
+                <div class="flex items-center justify-center h-10" title="{{ $brand->name }}">
                     @if($brand->logo)
-                        <img src="{{ asset('storage/' . $brand->logo) }}" alt="{{ $brand->name }}" class="h-full object-contain"
-                             onerror="this.parentElement.innerHTML='<span class=\'font-heading font-bold text-xl text-gray-400\'>{{ $brand->name }}</span>'">
+                        <img src="{{ asset('storage/' . $brand->logo) }}" alt="{{ $brand->name }}" class="h-full object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                             onerror="this.parentElement.innerHTML='<span class=\'font-bold text-lg text-gray-400\'>{{ $brand->name }}</span>'">
                     @else
-                        <span class="font-heading font-bold text-xl text-gray-400">{{ $brand->name }}</span>
+                        <span class="font-bold text-lg text-gray-400">{{ $brand->name }}</span>
                     @endif
                 </div>
             @endforeach
@@ -337,13 +455,15 @@
 <script>
 function countdown() {
     return {
-        hours: '00', minutes: '00', seconds: '00',
+        days: '00', hours: '00', minutes: '00', seconds: '00',
         start() {
             const endOfDay = new Date();
             endOfDay.setHours(23, 59, 59, 999);
             const update = () => {
                 const now = new Date();
                 let diff = Math.max(0, Math.floor((endOfDay - now) / 1000));
+                this.days = String(Math.floor(diff / 86400)).padStart(2, '0');
+                diff %= 86400;
                 this.hours = String(Math.floor(diff / 3600)).padStart(2, '0');
                 this.minutes = String(Math.floor((diff % 3600) / 60)).padStart(2, '0');
                 this.seconds = String(diff % 60).padStart(2, '0');

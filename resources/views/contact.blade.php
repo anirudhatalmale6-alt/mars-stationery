@@ -59,7 +59,7 @@
                                   class="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none">{{ old('message') }}</textarea>
                         @error('message') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                     </div>
-                    <button type="submit" class="bg-primary hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+                    <button type="submit" class="bg-primary hover:bg-[#d1405b] text-white px-8 py-3 rounded-lg font-semibold transition">
                         <i class="fas fa-paper-plane mr-2"></i> Send Message
                     </button>
                 </form>
@@ -71,7 +71,7 @@
             <div class="bg-white rounded-xl border border-gray-100 p-6">
                 <div class="space-y-5">
                     <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <div class="w-10 h-10 bg-pink-50 rounded-lg flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-map-marker-alt text-primary"></i>
                         </div>
                         <div>
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <div class="w-10 h-10 bg-pink-50 rounded-lg flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-phone-alt text-primary"></i>
                         </div>
                         <div>
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <div class="w-10 h-10 bg-pink-50 rounded-lg flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-envelope text-primary"></i>
                         </div>
                         <div>
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <div class="w-10 h-10 bg-pink-50 rounded-lg flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-clock text-primary"></i>
                         </div>
                         <div>
