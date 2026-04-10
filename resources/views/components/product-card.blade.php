@@ -5,47 +5,56 @@
     $imageUrl = $primaryImage ? asset('storage/' . $primaryImage->image_path) : 'https://placehold.co/400x400/f5f5f5/999999?text=' . urlencode($product->name);
     $effectivePrice = $product->sale_price && $product->sale_price > 0 ? $product->sale_price : $product->price;
     $onSale = $product->sale_price && $product->sale_price > 0 && $product->sale_price < $product->price;
+    $stockClass = $product->stock_quantity > 0 ? 'instock' : 'outofstock';
+    $featuredClass = $product->is_featured ? 'featured' : '';
+    $saleClass = $onSale ? 'sale' : '';
 @endphp
 
-<div class="group bg-white rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl">
-    {{-- Image --}}
-    <div class="relative overflow-hidden aspect-square bg-light">
-        <a href="{{ url('/products/' . $product->slug) }}">
-            <img src="{{ $imageUrl }}" alt="{{ $product->name }}"
-                 class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
-                 loading="lazy"
-                 onerror="this.src='https://placehold.co/400x400/f5f5f5/999999?text=No+Image'">
-        </a>
-
-        {{-- Sale Badge --}}
-        @if($onSale)
-            @php $discount = round((($product->price - $product->sale_price) / $product->price) * 100); @endphp
-            <span class="absolute top-3 left-3 bg-primary text-white text-[10px] font-bold px-2.5 py-1 rounded-full">-{{ $discount }}%</span>
-        @endif
-        @if($product->is_new_arrival)
-            <span class="absolute top-3 {{ $onSale ? 'left-16' : 'left-3' }} bg-navy text-white text-[10px] font-bold px-2.5 py-1 rounded-full">NEW</span>
-        @endif
-
-        {{-- Hover Quick View Icon --}}
-        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
-            <a href="{{ url('/products/' . $product->slug) }}"
-               class="w-11 h-11 bg-white rounded-full flex items-center justify-center text-navy hover:bg-primary hover:text-white transition-all duration-300 shadow-lg transform translate-y-3 group-hover:translate-y-0"
-               title="Quick View">
-                <i class="fas fa-eye text-sm"></i>
-            </a>
+<li class="product type-product status-publish {{ $stockClass }} {{ $featuredClass }} {{ $saleClass }} has-post-thumbnail purchasable product-type-simple">
+    <div class="product-block">
+        <div class="content-product-imagin"></div>
+        <div class="product-transition">
+            <div class="product-image">
+                <img width="400" height="400" src="{{ $imageUrl }}" class="attachment-shop_catalog size-shop_catalog" alt="{{ $product->name }}" loading="lazy"
+                     onerror="this.src='https://placehold.co/400x400/f5f5f5/999999?text=No+Image'">
+            </div>
+            <div class="group-action">
+                <div class="shop-action">
+                    <button class="woosq-btn" data-id="{{ $product->id }}" onclick="window.location='{{ url('/products/' . $product->slug) }}'">Quick view</button>
+                </div>
+            </div>
+            <a href="{{ url('/products/' . $product->slug) }}" class="woocommerce-LoopProduct-link woocommerce-loop-product__link"></a>
         </div>
-    </div>
-
-    {{-- Details --}}
-    <div class="p-4 text-center">
-        <a href="{{ url('/products/' . $product->slug) }}" class="block">
-            <h3 class="text-sm font-medium text-dark line-clamp-2 hover:text-primary transition min-h-[2.5rem] leading-snug">{{ $product->name }}</h3>
-        </a>
-        <div class="flex items-center justify-center gap-2 mt-2">
-            <span class="font-bold {{ $onSale ? 'text-primary' : 'text-dark' }}">LKR {{ number_format($effectivePrice, 2) }}</span>
+        <div class="product-caption">
+            <h3 class="woocommerce-loop-product__title">
+                <a href="{{ url('/products/' . $product->slug) }}">{{ $product->name }}</a>
+            </h3>
             @if($onSale)
-                <span class="text-gray-400 text-sm line-through">LKR {{ number_format($product->price, 2) }}</span>
+                <span class="price">
+                    <del aria-hidden="true">
+                        <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">LKR </span>{{ number_format($product->price, 2) }}</bdi></span>
+                    </del>
+                    <ins>
+                        <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">LKR </span>{{ number_format($effectivePrice, 2) }}</bdi></span>
+                    </ins>
+                </span>
+            @else
+                <span class="price">
+                    <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">LKR </span>{{ number_format($effectivePrice, 2) }}</bdi></span>
+                </span>
+            @endif
+        </div>
+        <div class="product-caption-bottom">
+            @if($product->stock_quantity > 0)
+                <form method="POST" action="{{ url('/cart/add') }}" style="display:inline">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="button product_type_simple add_to_cart_button" aria-label="Add &ldquo;{{ $product->name }}&rdquo; to your cart">Add to cart</button>
+                </form>
+            @else
+                <a href="{{ url('/products/' . $product->slug) }}" class="button product_type_simple" aria-label="Read more about &ldquo;{{ $product->name }}&rdquo;">Read more</a>
             @endif
         </div>
     </div>
-</div>
+</li>

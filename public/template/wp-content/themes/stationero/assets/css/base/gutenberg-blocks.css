@@ -1,0 +1,156 @@
+/* Text meant only for screen readers. */
+.home.page-template-template-fullwidth .hentry {
+  margin-bottom: 0;
+}
+.home.page-template-template-fullwidth .hentry .entry-content > .wp-block-cover,
+.home.page-template-template-fullwidth .hentry .entry-content > .wp-block-image {
+  margin-bottom: 4.235801032em;
+}
+.home.page-template-template-fullwidth .hentry .entry-content h2 + .woocommerce,
+.home.page-template-template-fullwidth .hentry .entry-content h2 + [class*=wp-block-woocommerce-] {
+  margin-top: 2.2906835em;
+}
+
+.entry-content [class*=wp-block-], .entry-content [class^=wp-block-] {
+  margin-bottom: 1.618em;
+}
+.entry-content [class*=wp-block-] [class*=wp-block-], .entry-content [class*=wp-block-] [class^=wp-block-], .entry-content [class^=wp-block-] [class*=wp-block-], .entry-content [class^=wp-block-] [class^=wp-block-] {
+  margin-bottom: 0;
+}
+.entry-content [class*=wp-block-] [class*=wp-block-].wp-block-latest-comments__comment, .entry-content [class*=wp-block-] [class^=wp-block-].wp-block-latest-comments__comment, .entry-content [class^=wp-block-] [class*=wp-block-].wp-block-latest-comments__comment, .entry-content [class^=wp-block-] [class^=wp-block-].wp-block-latest-comments__comment {
+  margin-bottom: 1.41575em;
+}
+
+.wp-block-group.has-background {
+  margin-bottom: 1.41575em;
+}
+
+blockquote, .wp-block-quote {
+  border-style: solid;
+  border-width: 0 0 0 3px;
+  border-color: #4BC4E0;
+  font-size: 16px;
+  color: var(--e-global-color-secondary);
+  font-family: var(--e-global-typography-primary-font-family);
+  padding: 0 25px;
+  margin: 1.41575em 7%;
+}
+blockquote cite, blockquote footer, .wp-block-quote cite, .wp-block-quote footer {
+  font-style: normal;
+  color: var(--e-global-color-lighter);
+  margin-top: 10px;
+  display: inherit;
+}
+blockquote p, .wp-block-quote p {
+  margin-bottom: 0;
+}
+
+.wp-block-quote.is-large footer,
+.wp-block-quote.is-large cite, .wp-block-quote.is-style-large footer,
+.wp-block-quote.is-style-large cite {
+  text-align: left;
+}
+.wp-block-quote.has-text-align-right {
+  border-style: solid;
+  border-width: 0 3px 0 0;
+  border-color: #4BC4E0;
+  padding: 0 25px;
+}
+
+.wp-block-pullquote:not(.is-style-solid-color) {
+  border-color: var(--e-global-color-primary);
+}
+
+.wp-block-pullquote blockquote {
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+  border: none;
+}
+.wp-block-pullquote blockquote p:first-child:before {
+  display: none;
+}
+
+.wp-block-cover h1:not(.has-text-color),
+.wp-block-cover h2:not(.has-text-color),
+.wp-block-cover h3:not(.has-text-color),
+.wp-block-cover h4:not(.has-text-color),
+.wp-block-cover h5:not(.has-text-color),
+.wp-block-cover h6:not(.has-text-color),
+.wp-block-cover p:not(.has-text-color),
+.wp-block-cover-image h1:not(.has-text-color),
+.wp-block-cover-image h2:not(.has-text-color),
+.wp-block-cover-image h3:not(.has-text-color),
+.wp-block-cover-image h4:not(.has-text-color),
+.wp-block-cover-image h5:not(.has-text-color),
+.wp-block-cover-image h6:not(.has-text-color),
+.wp-block-cover-image p:not(.has-text-color) {
+  color: #ffffff;
+}
+.wp-block-cover h1:not(.has-text-color) a,
+.wp-block-cover h2:not(.has-text-color) a,
+.wp-block-cover h3:not(.has-text-color) a,
+.wp-block-cover h4:not(.has-text-color) a,
+.wp-block-cover h5:not(.has-text-color) a,
+.wp-block-cover h6:not(.has-text-color) a,
+.wp-block-cover p:not(.has-text-color) a,
+.wp-block-cover-image h1:not(.has-text-color) a,
+.wp-block-cover-image h2:not(.has-text-color) a,
+.wp-block-cover-image h3:not(.has-text-color) a,
+.wp-block-cover-image h4:not(.has-text-color) a,
+.wp-block-cover-image h5:not(.has-text-color) a,
+.wp-block-cover-image h6:not(.has-text-color) a,
+.wp-block-cover-image p:not(.has-text-color) a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+.wp-block-cover h1:not(.has-text-color) a:hover,
+.wp-block-cover h2:not(.has-text-color) a:hover,
+.wp-block-cover h3:not(.has-text-color) a:hover,
+.wp-block-cover h4:not(.has-text-color) a:hover,
+.wp-block-cover h5:not(.has-text-color) a:hover,
+.wp-block-cover h6:not(.has-text-color) a:hover,
+.wp-block-cover p:not(.has-text-color) a:hover,
+.wp-block-cover-image h1:not(.has-text-color) a:hover,
+.wp-block-cover-image h2:not(.has-text-color) a:hover,
+.wp-block-cover-image h3:not(.has-text-color) a:hover,
+.wp-block-cover-image h4:not(.has-text-color) a:hover,
+.wp-block-cover-image h5:not(.has-text-color) a:hover,
+.wp-block-cover-image h6:not(.has-text-color) a:hover,
+.wp-block-cover-image p:not(.has-text-color) a:hover {
+  text-decoration: none;
+}
+
+.wp-block-table.is-style-stripes {
+  border-bottom: none;
+}
+
+.wp-block-button.is-style-squared .wp-block-button__link {
+  border-radius: 0;
+}
+
+body.stationero-full-width-content:not(.elementor-page).single .hentry .entry-content .alignwide {
+  margin-left: calc(25% - 25vw);
+  width: calc(50vw + 50%);
+  max-width: calc(50vw + 50%);
+  margin-bottom: 1em;
+}
+body.stationero-full-width-content:not(.elementor-page).single .hentry .entry-content .alignfull {
+  margin-left: calc(50% - 50vw + 7.5px);
+  width: calc(100vw - 15px);
+  max-width: 100vw;
+  margin-bottom: 1em;
+}
+body.stationero-full-width-content:not(.elementor-page) .editor-styles-wrapper .alignwide {
+  margin-left: calc(25% - 25vw);
+  width: calc(50vw + 50%);
+  max-width: calc(50vw + 50%);
+}
+body.stationero-full-width-content:not(.elementor-page) .editor-styles-wrapper .alignfull {
+  margin-left: calc(50% - 50vw);
+  width: 100vw;
+  max-width: 100vw;
+}
+
+/*# sourceMappingURL=gutenberg-blocks.css.map */

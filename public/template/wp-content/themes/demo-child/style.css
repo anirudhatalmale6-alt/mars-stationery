@@ -1,0 +1,18 @@
+/*
+Theme Name:     Demo-child
+Theme URI:
+Description:    stationero child theme.
+Author:         Me
+Author URI:
+Template:       stationero
+Version:        1.0.0
+*/
+
+.widget_categories ul li:nth-child(n+10) {
+    display: none !important;
+}
+
+
+.elementor-brand-item .elementor-brand-image img {
+    width: 90px;
+}

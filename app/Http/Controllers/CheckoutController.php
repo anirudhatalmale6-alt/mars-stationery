@@ -106,7 +106,7 @@ class CheckoutController extends Controller
             'total_weight' => $totalWeight,
             'payment_method' => $request->payment_method,
             'payment_status' => 'pending',
-            'order_status' => 'pending',
+            'order_status' => 'payment_pending',
             'notes' => $request->notes,
         ]);
 

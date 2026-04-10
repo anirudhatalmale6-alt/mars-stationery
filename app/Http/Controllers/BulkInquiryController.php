@@ -35,7 +35,7 @@ class BulkInquiryController extends Controller
             'phone' => $request->phone,
             'delivery_address' => $request->delivery_address,
             'message' => $request->message,
-            'status' => 'pending',
+            'status' => 'new',
         ]);
 
         foreach ($request->items as $item) {
@@ -72,7 +72,7 @@ class BulkInquiryController extends Controller
             'phone' => $request->phone,
             'delivery_address' => $request->delivery_address,
             'message' => $request->message,
-            'status' => 'pending',
+            'status' => 'new',
         ]);
 
         BulkInquiryItem::create([
