@@ -115,6 +115,60 @@
         .product-caption { flex: 1 0 auto; }
         .product-caption-bottom { margin-top: auto; }
         li.product { display: flex; }
+
+        /* Override stationero-icon font with Font Awesome */
+        .fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands,
+        .fas::before, .far::before, .fab::before {
+            font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', 'FontAwesome' !important;
+        }
+        .fas, .fa-solid { font-weight: 900 !important; }
+
+        /* Disable broken stationero-icon pseudo-elements in header */
+        .site-header-cart .cart-contents::before,
+        .header-group-action .site-header-cart .cart-contents::before,
+        .site-header-account a::before,
+        .button-search-popup::before,
+        .header-wishlist::before {
+            display: none !important;
+            content: none !important;
+        }
+
+        /* Make header icon links clickable and visible */
+        .site-header-account a,
+        .button-search-popup,
+        .header-wishlist,
+        .cart-contents {
+            display: inline-flex !important;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .site-header-account a .fas,
+        .button-search-popup .fas,
+        .header-wishlist .fas,
+        .header-group-action .fas {
+            font-size: 20px;
+            color: var(--secondary, #01213A);
+        }
+        .site-header-account a:hover .fas,
+        .button-search-popup:hover .fas,
+        .header-wishlist:hover .fas {
+            color: var(--primary, #E84F69);
+        }
+
+        /* Ensure LOGIN / REGISTER text is visible and clickable */
+        .site-header-account a {
+            color: var(--secondary, #01213A);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .site-header-account a:hover {
+            color: var(--primary, #E84F69);
+        }
+        .account-content.content-label {
+            display: inline !important;
+        }
     </style>
 
     {{-- Slick Theme --}}
@@ -725,6 +779,16 @@
 <script src='/template/wp-content/themes/stationero/assets/js/tooltipster.bundle.js'></script>
 <script src='/template/wp-content/themes/stationero/assets/js/woocommerce/main.min.js'></script>
 <script src='/template/wp-content/themes/stationero/assets/js/woocommerce/cart-canvas.min.js'></script>
+
+{{-- Fix: Unbind template JS click handlers that prevent login/cart navigation --}}
+<script>
+jQuery(function($) {
+    // cart-canvas.min.js binds preventDefault on account link and cart link
+    // Unbind and allow normal navigation
+    $('body .header-group-action .site-header-account a').off('click');
+    $('body .header-group-action .site-header-cart .cart-contents').off('click');
+});
+</script>
 
 {{-- Elementor Frontend --}}
 <script src='/template/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js'></script>
