@@ -108,6 +108,13 @@
             .woocommerce.columns-mobile-2 ul.products li.product{flex: 0 0 50%; max-width: 50%;}
         }
         .woocommerce form .form-row .required { visibility: visible; }
+        body, body *, input, select, textarea, button { font-family: 'Rajdhani', sans-serif !important; }
+        .product-block { display: flex; flex-direction: column; height: 100%; }
+        .product-transition { flex: 0 0 auto; }
+        .product-image img { width: 100%; height: 250px; object-fit: contain; background: #f5f5f5; }
+        .product-caption { flex: 1 0 auto; }
+        .product-caption-bottom { margin-top: auto; }
+        li.product { display: flex; }
     </style>
 
     {{-- Slick Theme --}}
@@ -301,12 +308,12 @@
                                             <div class="site-header-account">
                                                 @auth
                                                     <a href="{{ url('/account') }}">
-                                                        <i class="stationero-icon-user2"></i>
+                                                        <i class="fas fa-user"></i>
                                                         <span class="account-content content-label">My Account</span>
                                                     </a>
                                                 @else
                                                     <a href="{{ url('/login') }}">
-                                                        <i class="stationero-icon-user2"></i>
+                                                        <i class="fas fa-user"></i>
                                                         <span class="account-content content-label">Login / Register</span>
                                                     </a>
                                                 @endauth
@@ -323,12 +330,12 @@
                                     <div class="elementor-header-group-wrapper">
                                         <div class="header-group-action">
                                             <div class="site-header-search">
-                                                <a href="#" class="button-search-popup"><i class="stationero-icon-search"></i></a>
+                                                <a href="#" class="button-search-popup"><i class="fas fa-search"></i></a>
                                             </div>
 
                                             <div class="site-header-wishlist">
                                                 <a class="header-wishlist" href="#">
-                                                    <i class="stationero-icon-heart"></i>
+                                                    <i class="fas fa-heart"></i>
                                                     <span class="count">0</span>
                                                     <span class="wishlist-content content-label">My Wishlist</span>
                                                 </a>
@@ -532,7 +539,7 @@
                                     <div class="elementor-widget-container">
                                         <ul class="elementor-icon-list-items">
                                             <li class="elementor-icon-list-item">
-                                                <span class="elementor-icon-list-icon"><i aria-hidden="true" class="stationero-icon- stationero-icon-phone"></i></span>
+                                                <span class="elementor-icon-list-icon"><i aria-hidden="true" class="fas fa-phone"></i></span>
                                                 <span class="elementor-icon-list-text">{{ $settings['phone'] ?? '(+94) 11 234 5678' }}</span>
                                             </li>
                                         </ul>
@@ -555,7 +562,7 @@
                                     <div class="elementor-widget-container">
                                         <ul class="elementor-icon-list-items">
                                             <li class="elementor-icon-list-item">
-                                                <span class="elementor-icon-list-icon"><i aria-hidden="true" class="stationero-icon- stationero-icon-envelope"></i></span>
+                                                <span class="elementor-icon-list-icon"><i aria-hidden="true" class="fas fa-envelope"></i></span>
                                                 <span class="elementor-icon-list-text">{{ $settings['email'] ?? 'info@mars.lk' }}</span>
                                             </li>
                                         </ul>
@@ -603,7 +610,7 @@
 {{-- Mobile Navigation --}}
 <div class="stationero-mobile-nav">
     <div class="menu-scroll-mobile">
-        <a href="#" class="mobile-nav-close"><i class="stationero-icon-times"></i></a>
+        <a href="#" class="mobile-nav-close"><i class="fas fa-times"></i></a>
         <div class="mobile-nav-tabs">
             <ul>
                 <li class="mobile-tab-title mobile-pages-title active" data-menu="pages"><span>Main menu</span></li>
@@ -655,7 +662,7 @@
 {{-- Search Popup --}}
 <div class="site-search-popup">
     <div class="site-search-popup-wrap">
-        <a href="#" class="site-search-popup-close"><i class="stationero-icon-times-circle"></i></a>
+        <a href="#" class="site-search-popup-close"><i class="fas fa-times-circle"></i></a>
         <div class="site-search ajax-search">
             <div class="widget woocommerce widget_product_search">
                 <div class="ajax-search-result d-none"></div>
@@ -703,7 +710,7 @@
 <div class="cart-side-overlay"></div>
 
 {{-- Scroll to Top --}}
-<a href="#" class="scrollup"><span class="scrollup-icon stationero-icon-angle-up"></span><span class="scrollup-label">Top</span></a>
+<a href="#" class="scrollup"><span class="scrollup-icon fas fa-angle-up"></span><span class="scrollup-label">Top</span></a>
 
 {{-- JS Files --}}
 <script src='/template/wp-content/themes/stationero/assets/js/vendor/slick.min.js'></script>

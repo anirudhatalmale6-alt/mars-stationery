@@ -37,7 +37,7 @@
                                                     <div class="elementor-cta__button-wrapper elementor-cta__content-item elementor-content-item">
                                                         <span class="elementor-cta__button elementor-button-custom">
                                                             <span>Shop Now</span>
-                                                            <i aria-hidden="true" class="stationero-icon- stationero-icon-arrow-right"></i>
+                                                            <i aria-hidden="true" class="fas fa-arrow-right"></i>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -67,7 +67,7 @@
                                                     <div class="elementor-cta__button-wrapper elementor-cta__content-item elementor-content-item">
                                                         <span class="elementor-cta__button elementor-button-custom">
                                                             <span>Shop Now</span>
-                                                            <i aria-hidden="true" class="stationero-icon- stationero-icon-arrow-right"></i>
+                                                            <i aria-hidden="true" class="fas fa-arrow-right"></i>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -91,7 +91,7 @@
                                                     <div class="elementor-cta__button-wrapper elementor-cta__content-item elementor-content-item">
                                                         <span class="elementor-cta__button elementor-button-custom">
                                                             <span>Shop Now</span>
-                                                            <i aria-hidden="true" class="stationero-icon- stationero-icon-arrow-right"></i>
+                                                            <i aria-hidden="true" class="fas fa-arrow-right"></i>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -108,10 +108,10 @@
                         <div class="elementor-container elementor-column-gap-no">
                             @php
                                 $badges = [
-                                    ['icon' => 'stationero-icon-shipping', 'title' => 'Fast delivery', 'desc' => 'For all orders over $120'],
-                                    ['icon' => 'stationero-icon-temp', 'title' => 'Safe Payments', 'desc' => '100% secure payment'],
-                                    ['icon' => 'stationero-icon-gift', 'title' => 'Discount Coupons', 'desc' => 'Enjoy Huge Promotions'],
-                                    ['icon' => 'stationero-icon-comment', 'title' => 'Quality Support', 'desc' => 'Dedicated 24/7 support'],
+                                    ['icon' => 'fas fa-truck', 'title' => 'Fast delivery', 'desc' => 'For all orders over $120'],
+                                    ['icon' => 'fas fa-tags', 'title' => 'Safe Payments', 'desc' => '100% secure payment'],
+                                    ['icon' => 'fas fa-gift', 'title' => 'Discount Coupons', 'desc' => 'Enjoy Huge Promotions'],
+                                    ['icon' => 'fas fa-comment', 'title' => 'Quality Support', 'desc' => 'Dedicated 24/7 support'],
                                 ];
                             @endphp
                             @foreach($badges as $badge)
@@ -122,7 +122,7 @@
                                             <div class="elementor-icon-box-wrapper">
                                                 <div class="elementor-icon-box-icon">
                                                     <span class="elementor-icon elementor-animation-">
-                                                        <i aria-hidden="true" class="stationero-icon- {{ $badge['icon'] }}"></i>
+                                                        <i aria-hidden="true" class="{{ $badge['icon'] }}"></i>
                                                     </span>
                                                 </div>
                                                 <div class="elementor-icon-box-content">
@@ -414,7 +414,7 @@
                                 <a href="{{ url('/products/' . $dealProduct->slug) }}" class="elementor-button-link elementor-button elementor-size-md" role="button">
                                     <span class="elementor-button-content-wrapper">
                                         <span class="elementor-button-icon elementor-align-icon-right">
-                                            <i aria-hidden="true" class="stationero-icon- stationero-icon-arrow-right"></i>
+                                            <i aria-hidden="true" class="fas fa-arrow-right"></i>
                                         </span>
                                         <span class="elementor-button-text">Shop Now  </span>
                                     </span>
@@ -457,7 +457,7 @@
                                 <a href="{{ url('/products') }}" class="elementor-button-link elementor-button elementor-size-md" role="button">
                                     <span class="elementor-button-content-wrapper">
                                         <span class="elementor-button-icon elementor-align-icon-right">
-                                            <i aria-hidden="true" class="stationero-icon- stationero-icon-arrow-right"></i>
+                                            <i aria-hidden="true" class="fas fa-arrow-right"></i>
                                         </span>
                                         <span class="elementor-button-text">Shop Now  </span>
                                     </span>
@@ -507,7 +507,7 @@
                                     <div class="column-item elementor-testimonial-item">
                                         <div class="inner">
                                             <div class="testimonial-content">
-                                                <div class="testimonial-icon"><i class="stationero-icon-quote2"></i></div>
+                                                <div class="testimonial-icon"><i class="fas fa-quote-left"></i></div>
                                                 <div class="testimonial_info">
                                                     <div class="content">" {{ $t['quote'] }} "</div>
                                                     <div class="testimonial-caption">
@@ -528,22 +528,20 @@
                         </div>
                     </div>
 
-                    {{-- Image Gallery --}}
-                    <div class="elementor-element elementor-element-790a06f elementor-widget elementor-widget-stationero-image-gallery" data-id="790a06f" data-element_type="widget" data-widget_type="stationero-image-gallery.default">
+                    {{-- Shop Now CTA --}}
+                    <div class="elementor-element elementor-widget elementor-widget-stationero-banner" style="margin-top: 40px;">
                         <div class="elementor-widget-container">
-                            <div class="elementor-opal-image-gallery">
-                                <div class="row grid" data-elementor-columns="5" data-elementor-columns-tablet="3" data-elementor-columns-mobile="2">
-                                    @for($g = 1; $g <= 5; $g++)
-                                    <div class="column-item grid__item masonry-item__all gallery_group_0">
-                                        <a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="790a06f" href="/template/wp-content/uploads/2022/04/h5_image_{{ $g }}.jpg">
-                                            <img src="/template/wp-content/uploads/2022/04/h5_image_{{ $g }}.jpg" alt="Gallery image {{ $g }}">
-                                            <div class="gallery-item-overlay">
-                                                <i class="stationero-icon-search"></i>
-                                            </div>
-                                        </a>
+                            <div style="background: linear-gradient(135deg, #01213A 0%, #023a5e 100%); border-radius: 12px; padding: 60px 40px; text-align: center; position: relative; overflow: hidden;">
+                                <div style="position: relative; z-index: 2;">
+                                    <h2 style="color: #fff; font-family: 'Rajdhani', sans-serif; font-size: 36px; font-weight: 700; margin-bottom: 10px;">Ready to Shop?</h2>
+                                    <p style="color: rgba(255,255,255,0.8); font-size: 18px; margin-bottom: 30px; max-width: 500px; margin-left: auto; margin-right: auto;">Explore our complete collection of premium stationery and office supplies</p>
+                                    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                                        <a href="{{ url('/products') }}" style="display: inline-block; background: #E84F69; color: #fff; padding: 14px 36px; border-radius: 6px; font-weight: 600; font-size: 16px; text-decoration: none; transition: background 0.3s;">Go to Shop <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
+                                        <a href="{{ url('/products?filter=new') }}" style="display: inline-block; background: transparent; color: #fff; padding: 14px 36px; border-radius: 6px; font-weight: 600; font-size: 16px; text-decoration: none; border: 2px solid rgba(255,255,255,0.4); transition: border-color 0.3s;">New Arrivals</a>
                                     </div>
-                                    @endfor
                                 </div>
+                                <div style="position: absolute; top: -30px; right: -30px; width: 200px; height: 200px; background: rgba(232,79,105,0.15); border-radius: 50%;"></div>
+                                <div style="position: absolute; bottom: -50px; left: -20px; width: 150px; height: 150px; background: rgba(75,196,224,0.1); border-radius: 50%;"></div>
                             </div>
                         </div>
                     </div>

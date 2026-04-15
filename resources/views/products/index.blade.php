@@ -25,7 +25,7 @@
     <div class="flex flex-col lg:flex-row gap-8">
 
         {{-- Sidebar --}}
-        <aside class="lg:w-64 flex-shrink-0" x-data="{ showFilters: false }">
+        <aside class="lg:w-64 flex-shrink-0" x-data="{ showFilters: window.innerWidth >= 1024 }">
             <button @click="showFilters = !showFilters" class="lg:hidden w-full bg-white border border-gray-200 rounded-lg px-4 py-3 flex items-center justify-between mb-4">
                 <span class="font-medium"><i class="fas fa-filter mr-2"></i> Filters</span>
                 <i class="fas fa-chevron-down" :class="showFilters && 'rotate-180'" style="transition: transform 0.2s"></i>
