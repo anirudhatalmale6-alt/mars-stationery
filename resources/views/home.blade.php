@@ -37,7 +37,7 @@
                                                     <div class="elementor-cta__button-wrapper elementor-cta__content-item elementor-content-item">
                                                         <span class="elementor-cta__button elementor-button-custom">
                                                             <span>Shop Now</span>
-                                                            <i aria-hidden="true" class="fas fa-arrow-right"></i>
+                                                            <i aria-hidden="true" class="stationero-icon- stationero-icon-arrow-right"></i>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -67,7 +67,7 @@
                                                     <div class="elementor-cta__button-wrapper elementor-cta__content-item elementor-content-item">
                                                         <span class="elementor-cta__button elementor-button-custom">
                                                             <span>Shop Now</span>
-                                                            <i aria-hidden="true" class="fas fa-arrow-right"></i>
+                                                            <i aria-hidden="true" class="stationero-icon- stationero-icon-arrow-right"></i>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -91,7 +91,7 @@
                                                     <div class="elementor-cta__button-wrapper elementor-cta__content-item elementor-content-item">
                                                         <span class="elementor-cta__button elementor-button-custom">
                                                             <span>Shop Now</span>
-                                                            <i aria-hidden="true" class="fas fa-arrow-right"></i>
+                                                            <i aria-hidden="true" class="stationero-icon- stationero-icon-arrow-right"></i>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -108,10 +108,10 @@
                         <div class="elementor-container elementor-column-gap-no">
                             @php
                                 $badges = [
-                                    ['icon' => 'fas fa-truck', 'title' => 'Fast delivery', 'desc' => 'For all orders over $120'],
-                                    ['icon' => 'fas fa-tags', 'title' => 'Safe Payments', 'desc' => '100% secure payment'],
-                                    ['icon' => 'fas fa-gift', 'title' => 'Discount Coupons', 'desc' => 'Enjoy Huge Promotions'],
-                                    ['icon' => 'fas fa-comment', 'title' => 'Quality Support', 'desc' => 'Dedicated 24/7 support'],
+                                    ['icon' => 'stationero-icon- stationero-icon-shipping', 'title' => 'Fast delivery', 'desc' => 'For all orders over $120'],
+                                    ['icon' => 'stationero-icon- stationero-icon-temp', 'title' => 'Safe Payments', 'desc' => '100% secure payment'],
+                                    ['icon' => 'stationero-icon- stationero-icon-gift', 'title' => 'Discount Coupons', 'desc' => 'Enjoy Huge Promotions'],
+                                    ['icon' => 'stationero-icon- stationero-icon-comment', 'title' => 'Quality Support', 'desc' => 'Dedicated 24/7 support'],
                                 ];
                             @endphp
                             @foreach($badges as $badge)
@@ -414,7 +414,7 @@
                                 <a href="{{ url('/products/' . $dealProduct->slug) }}" class="elementor-button-link elementor-button elementor-size-md" role="button">
                                     <span class="elementor-button-content-wrapper">
                                         <span class="elementor-button-icon elementor-align-icon-right">
-                                            <i aria-hidden="true" class="fas fa-arrow-right"></i>
+                                            <i aria-hidden="true" class="stationero-icon- stationero-icon-arrow-right"></i>
                                         </span>
                                         <span class="elementor-button-text">Shop Now  </span>
                                     </span>
@@ -457,7 +457,7 @@
                                 <a href="{{ url('/products') }}" class="elementor-button-link elementor-button elementor-size-md" role="button">
                                     <span class="elementor-button-content-wrapper">
                                         <span class="elementor-button-icon elementor-align-icon-right">
-                                            <i aria-hidden="true" class="fas fa-arrow-right"></i>
+                                            <i aria-hidden="true" class="stationero-icon- stationero-icon-arrow-right"></i>
                                         </span>
                                         <span class="elementor-button-text">Shop Now  </span>
                                     </span>
@@ -507,7 +507,7 @@
                                     <div class="column-item elementor-testimonial-item">
                                         <div class="inner">
                                             <div class="testimonial-content">
-                                                <div class="testimonial-icon"><i class="fas fa-quote-left"></i></div>
+                                                <div class="testimonial-icon"><i class="stationero-icon-quote2"></i></div>
                                                 <div class="testimonial_info">
                                                     <div class="content">" {{ $t['quote'] }} "</div>
                                                     <div class="testimonial-caption">
