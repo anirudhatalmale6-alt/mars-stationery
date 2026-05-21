@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\DeliverySetting;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\SiteSetting;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -98,12 +99,13 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Correction Tape (5mm x 8m)', 'category' => 'office-supplies', 'price' => 250, 'weight' => 25, 'sku' => 'OFF-COR-003', 'is_featured' => true, 'is_new_arrival' => false, 'description' => 'Quick-dry correction tape. Smooth application, easy to write over. 8 metres long.'],
         ];
 
+        $imageIndex = 1;
         foreach ($products as $p) {
             $catSlug = $p['category'];
             $category = Category::where('slug', $catSlug)->first();
             unset($p['category']);
 
-            Product::updateOrCreate(
+            $product = Product::updateOrCreate(
                 ['sku' => $p['sku']],
                 array_merge($p, [
                     'slug' => Str::slug($p['name']),
@@ -113,19 +115,28 @@ class DatabaseSeeder extends Seeder
                     'sale_price' => $p['sale_price'] ?? null,
                 ])
             );
+
+            $imgFile = sprintf('products/product-%02d.jpg', $imageIndex);
+            ProductImage::updateOrCreate(
+                ['product_id' => $product->id, 'is_primary' => true],
+                ['image_path' => $imgFile, 'sort_order' => 0]
+            );
+            $imageIndex++;
         }
 
         // Banners
         $banners = [
-            ['title' => 'Premium Stationery Collection', 'subtitle' => 'Discover our wide range of quality stationery products', 'sort_order' => 1],
-            ['title' => 'Back to School Essentials', 'subtitle' => 'Everything you need for the new school year', 'sort_order' => 2],
-            ['title' => 'Office Supplies Sale', 'subtitle' => 'Up to 40% off on selected office supplies', 'sort_order' => 3],
+            ['title' => 'Premium Stationery Collection', 'subtitle' => 'Discover our wide range of quality stationery products', 'sort_order' => 1, 'image' => 'banners/banner-01.jpg'],
+            ['title' => 'Back to School Essentials', 'subtitle' => 'Everything you need for the new school year', 'sort_order' => 2, 'image' => 'banners/banner-02.jpg'],
+            ['title' => 'Office Supplies Sale', 'subtitle' => 'Up to 40% off on selected office supplies', 'sort_order' => 3, 'image' => 'banners/banner-03.jpg'],
         ];
 
         foreach ($banners as $b) {
+            $image = $b['image'];
+            unset($b['image']);
             Banner::updateOrCreate(
                 ['title' => $b['title']],
-                array_merge($b, ['is_active' => true, 'link' => '/products', 'image' => 'banners/placeholder.jpg'])
+                array_merge($b, ['is_active' => true, 'link' => '/products', 'image' => $image])
             );
         }
 

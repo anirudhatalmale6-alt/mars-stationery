@@ -258,7 +258,7 @@
                                         <a data-elementor-open-lightbox="" class='elementor-clickable' href="{{ url('/') }}">
                                             <div class="hfe-site-logo-set">
                                                 <div class="hfe-site-logo-container">
-                                                    <img class="hfe-site-logo-img elementor-animation-" src="/template/wp-content/uploads/2022/03/logo.svg" alt="{{ $settings['site_name'] ?? 'Mars Stationery' }}">
+                                                    <img class="hfe-site-logo-img elementor-animation-" src="/images/logo.jpg" alt="{{ $settings['site_name'] ?? 'Mars Stationery' }}" style="max-height: 60px; width: auto;">
                                                 </div>
                                             </div>
                                         </a>
@@ -465,7 +465,7 @@
                                             <a data-elementor-open-lightbox="" class='elementor-clickable' href="{{ url('/') }}">
                                                 <div class="hfe-site-logo-set">
                                                     <div class="hfe-site-logo-container">
-                                                        <img class="hfe-site-logo-img elementor-animation-" src="/template/wp-content/uploads/2022/03/logo-2.svg" alt="{{ $settings['site_name'] ?? 'Mars Stationery' }}">
+                                                        <img class="hfe-site-logo-img elementor-animation-" src="/images/logo.jpg" alt="{{ $settings['site_name'] ?? 'Mars Stationery' }}" style="max-height: 50px; width: auto;">
                                                     </div>
                                                 </div>
                                             </a>
