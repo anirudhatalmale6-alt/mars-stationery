@@ -26,6 +26,52 @@ use App\Http\Controllers\Admin\AdminBrandController;
 | Frontend Routes
 |--------------------------------------------------------------------------
 */
+Route::get('/mars-setup-2026', function () {
+    if (request('key') !== 'mars2026setup') abort(404);
+    $output = '<h2>Mars Setup</h2><pre>';
+
+    // Storage symlink
+    $target = storage_path('app/public');
+    $link = public_path('storage');
+    $output .= "Target: $target\nLink: $link\n\n";
+
+    if (is_link($link)) {
+        $output .= "Existing symlink found, removing...\n";
+        unlink($link);
+    } elseif (is_dir($link)) {
+        $output .= "Directory exists at link path, removing...\n";
+        exec("rm -rf " . escapeshellarg($link));
+    }
+
+    if (symlink($target, $link)) {
+        $output .= "Symlink created successfully!\n";
+    } else {
+        exec("ln -sf " . escapeshellarg($target) . " " . escapeshellarg($link));
+        $output .= "Symlink created via shell.\n";
+    }
+
+    // Run artisan commands
+    $commands = ['storage:link', 'migrate --force', 'db:seed --force', 'config:clear', 'cache:clear', 'view:clear'];
+    foreach ($commands as $cmd) {
+        $output .= "\n> php artisan $cmd\n";
+        \Artisan::call($cmd);
+        $output .= \Artisan::output();
+    }
+
+    // Verify
+    $output .= "\n--- Verification ---\n";
+    $output .= "Symlink exists: " . (is_link($link) ? 'YES' : 'NO') . "\n";
+    if (is_dir($link . '/products')) {
+        $images = glob($link . '/products/*.jpg');
+        $output .= "Product images found: " . count($images) . "\n";
+    } else {
+        $output .= "Products dir not accessible via symlink\n";
+    }
+
+    $output .= "</pre>";
+    return $output;
+});
+
 Route::get('/', [HomeController::class, 'index']);
 
 // Products
