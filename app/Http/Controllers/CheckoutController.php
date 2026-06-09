@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderPlaced;
 use App\Models\Address;
 use App\Models\DeliverySetting;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class CheckoutController extends Controller
@@ -123,6 +125,12 @@ class CheckoutController extends Controller
         }
 
         session()->forget('cart');
+
+        $order->load('items');
+        $email = auth()->user()?->email;
+        if ($email) {
+            Mail::to($email)->send(new OrderPlaced($order));
+        }
 
         return redirect('/order-confirmation/' . $order->id)->with('success', 'Order placed successfully!');
     }

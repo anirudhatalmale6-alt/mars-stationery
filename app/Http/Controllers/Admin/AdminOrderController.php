@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderStatusUpdated;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AdminOrderController extends Controller
 {
@@ -38,12 +40,24 @@ class AdminOrderController extends Controller
             'payment_status' => 'nullable|string|in:pending,paid,failed,refunded',
         ]);
 
-        if ($request->filled('order_status')) {
+        $email = $order->user?->email ?? null;
+
+        if ($request->filled('order_status') && $order->order_status !== $validated['order_status']) {
+            $oldStatus = $order->order_status;
             $order->order_status = $validated['order_status'];
+
+            if ($email) {
+                Mail::to($email)->send(new OrderStatusUpdated($order, 'order', $oldStatus, $validated['order_status']));
+            }
         }
 
-        if ($request->filled('payment_status')) {
+        if ($request->filled('payment_status') && $order->payment_status !== $validated['payment_status']) {
+            $oldStatus = $order->payment_status;
             $order->payment_status = $validated['payment_status'];
+
+            if ($email) {
+                Mail::to($email)->send(new OrderStatusUpdated($order, 'payment', $oldStatus, $validated['payment_status']));
+            }
         }
 
         $order->save();
