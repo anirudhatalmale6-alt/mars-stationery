@@ -19,7 +19,16 @@ class BulkInquiry extends Model
         'delivery_address',
         'message',
         'status',
+        'admin_reply',
+        'replied_at',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'replied_at' => 'datetime',
+        ];
+    }
 
     public function user(): BelongsTo
     {

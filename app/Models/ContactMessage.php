@@ -16,12 +16,15 @@ class ContactMessage extends Model
         'subject',
         'message',
         'is_read',
+        'admin_reply',
+        'replied_at',
     ];
 
     protected function casts(): array
     {
         return [
             'is_read' => 'boolean',
+            'replied_at' => 'datetime',
         ];
     }
 }

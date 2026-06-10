@@ -27,11 +27,28 @@
                 <p class="text-sm text-gray-800 whitespace-pre-line leading-relaxed">{{ $contact->message }}</p>
             </div>
 
-            <div class="mt-6">
-                <a href="mailto:{{ $contact->email }}" class="inline-flex items-center bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                    Reply via Email
-                </a>
+            @if($contact->admin_reply)
+                <div class="border-t border-gray-200 pt-4 mt-4">
+                    <h3 class="text-sm font-medium text-green-600 mb-2">Admin Reply (sent {{ $contact->replied_at->format('d M Y, h:i A') }})</h3>
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                        <p class="text-sm text-gray-800 whitespace-pre-line leading-relaxed">{{ $contact->admin_reply }}</p>
+                    </div>
+                </div>
+            @endif
+
+            <div class="border-t border-gray-200 pt-4 mt-6">
+                <h3 class="text-sm font-medium text-gray-700 mb-3">{{ $contact->admin_reply ? 'Update Reply' : 'Send Reply' }}</h3>
+                <form method="POST" action="{{ route('admin.contacts.reply', $contact) }}">
+                    @csrf
+                    <textarea name="admin_reply" rows="5" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500" placeholder="Type your reply here...">{{ old('admin_reply', $contact->admin_reply) }}</textarea>
+                    @error('admin_reply')
+                        <p class="text-red-600 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                    <button type="submit" class="mt-3 inline-flex items-center bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                        {{ $contact->admin_reply ? 'Update & Resend Reply' : 'Send Reply' }}
+                    </button>
+                </form>
             </div>
         </div>
     </div>

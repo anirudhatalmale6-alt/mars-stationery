@@ -149,10 +149,12 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('inquiries', [AdminBulkInquiryController::class, 'index'])->name('inquiries.index');
     Route::get('inquiries/{inquiry}', [AdminBulkInquiryController::class, 'show'])->name('inquiries.show');
     Route::patch('inquiries/{inquiry}/status', [AdminBulkInquiryController::class, 'updateStatus'])->name('inquiries.updateStatus');
+    Route::post('inquiries/{inquiry}/reply', [AdminBulkInquiryController::class, 'reply'])->name('inquiries.reply');
 
     // Contact Messages
     Route::get('contacts', [AdminContactController::class, 'index'])->name('contacts.index');
     Route::get('contacts/{contact}', [AdminContactController::class, 'show'])->name('contacts.show');
+    Route::post('contacts/{contact}/reply', [AdminContactController::class, 'reply'])->name('contacts.reply');
 
     // Delivery Settings
     Route::get('delivery', [AdminDeliveryController::class, 'edit'])->name('delivery.edit');

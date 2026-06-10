@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BulkInquiryReceived;
 use App\Models\BulkInquiry;
 use App\Models\BulkInquiryItem;
 use App\Models\Product;
+use App\Models\SiteSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class BulkInquiryController extends Controller
 {
@@ -48,6 +51,12 @@ class BulkInquiryController extends Controller
             ]);
         }
 
+        $inquiry->load('items');
+        $adminEmail = SiteSetting::where('key', 'email')->value('value');
+        if ($adminEmail) {
+            Mail::to($adminEmail)->send(new BulkInquiryReceived($inquiry));
+        }
+
         return back()->with('success', 'Your bulk inquiry has been submitted! We will contact you soon.');
     }
 
@@ -81,6 +90,12 @@ class BulkInquiryController extends Controller
             'product_name' => $product->name,
             'quantity' => $request->quantity,
         ]);
+
+        $inquiry->load('items');
+        $adminEmail = SiteSetting::where('key', 'email')->value('value');
+        if ($adminEmail) {
+            Mail::to($adminEmail)->send(new BulkInquiryReceived($inquiry));
+        }
 
         return back()->with('success', 'Your inquiry has been submitted! We will contact you shortly.');
     }

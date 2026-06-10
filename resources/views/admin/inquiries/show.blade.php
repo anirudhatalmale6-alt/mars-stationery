@@ -61,11 +61,34 @@
                     @csrf
                     @method('PATCH')
                     <select name="status" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 mb-3">
-                        @foreach(['pending', 'reviewed', 'quoted', 'accepted', 'rejected'] as $s)
+                        @foreach(['pending', 'reviewed', 'quoted', 'accepted', 'rejected', 'responded'] as $s)
                             <option value="{{ $s }}" {{ $inquiry->status == $s ? 'selected' : '' }}>{{ ucfirst($s) }}</option>
                         @endforeach
                     </select>
                     <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">Update Status</button>
+                </form>
+            </div>
+
+            {{-- Reply --}}
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">{{ $inquiry->admin_reply ? 'Reply Sent' : 'Send Reply' }}</h3>
+
+                @if($inquiry->admin_reply)
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
+                        <p class="text-xs text-green-600 font-medium mb-1">Replied {{ $inquiry->replied_at->format('d M Y, h:i A') }}</p>
+                        <p class="text-sm text-gray-800 whitespace-pre-line">{{ $inquiry->admin_reply }}</p>
+                    </div>
+                @endif
+
+                <form method="POST" action="{{ route('admin.inquiries.reply', $inquiry) }}">
+                    @csrf
+                    <textarea name="admin_reply" rows="4" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 mb-3" placeholder="Type your reply...">{{ old('admin_reply', $inquiry->admin_reply) }}</textarea>
+                    @error('admin_reply')
+                        <p class="text-red-600 text-xs mt-1 mb-2">{{ $message }}</p>
+                    @enderror
+                    <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                        {{ $inquiry->admin_reply ? 'Update & Resend Reply' : 'Send Reply via Email' }}
+                    </button>
                 </form>
             </div>
         </div>
